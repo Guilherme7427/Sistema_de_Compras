@@ -1,8 +1,13 @@
 package Sistema_De_Compras.Entities;
 
 public class Carrinho {
-    public double valorTotal;
-    public int idPedidoBase = 1000;
+    private double valorTotal;
+    private int idPedidoBase;
+
+    public Carrinho(double valorTotal, int idPedidoBase) {
+        this.valorTotal = valorTotal;
+        this.idPedidoBase = idPedidoBase;
+    }
 
     public void adicionarProduto(double preco) {
         valorTotal = valorTotal + preco;
@@ -22,4 +27,12 @@ public class Carrinho {
         double valorFinal = valorTotal + calcularFrete();
         return valorFinal;
     }
+
+    public double getValorTotal() {
+        return valorTotal;
     }
+
+    public int getIdPedidoBase() {
+        return idPedidoBase;
+    }
+}

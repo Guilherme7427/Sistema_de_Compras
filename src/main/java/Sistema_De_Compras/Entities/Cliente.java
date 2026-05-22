@@ -1,18 +1,25 @@
 package Sistema_De_Compras.Entities;
 
 public class Cliente {
-    public String[] nomes = {"João Silva", "Maria Oliveira"};
-    public String[] cpfs = {"123", "456"};
-    public String[] enderecos = {"Rua A, 123", "Av. B, 456"};
-    public boolean[] cartaoAprovado = {true, false};
-    public int usuarioLogado;
+    private String[] nomes;
+    private String[] cpfs;
+    private String[] enderecos;
+    private boolean[] cartaoAprovado;
+    private int usuarioLogado;
+
+    public Cliente() {
+        this.nomes = new String[]{"João Silva", "Maria Oliveira"};
+        this.cpfs = new String[]{"123", "456"};
+        this.enderecos = new String[]{"Rua A, 123", "Av. B, 456"};
+        this.cartaoAprovado = new boolean[]{true, false};
+    }
 
     public boolean verificarCliente(String cpf) {
         boolean temCliente = false;
         for (int i = 0; i < cpfs.length; i++) {
             if (cpf.equals(cpfs[i])) {
                 temCliente = true;
-                usuarioLogado = i;
+                this.usuarioLogado = i;
                 break;
             }
         }
@@ -20,11 +27,18 @@ public class Cliente {
     }
 
     public boolean PagamentoAutorizado() {
-        boolean autorizado = false;
-        if (cartaoAprovado[usuarioLogado]) {
-            autorizado = true;
-        }
-        return autorizado;
+        return cartaoAprovado[usuarioLogado];
+    }
+    public String getNomeLogado() {
+        return nomes[usuarioLogado];
+    }
+
+    public String getEnderecoLogado() {
+        return enderecos[usuarioLogado];
+    }
+
+    public int getUsuarioLogado() {
+        return usuarioLogado;
     }
 }
 

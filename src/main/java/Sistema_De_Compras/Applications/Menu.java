@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
     Cliente cliente = new Cliente();
-    Carrinho carrinho = new Carrinho();
+    Carrinho carrinho = new Carrinho(0.0, 1000);
 
     public void menuPrincipal() {
         System.out.print("Quantos produtos deseja adicionar? ");
@@ -24,20 +24,22 @@ public class Menu {
         String cpf = sc.next();
 
         if (cliente.verificarCliente(cpf)) {
-            System.out.println("Cliente: " + cliente.nomes[cliente.usuarioLogado]);
+            // AJUSTADO: Usando o método que criamos na classe Cliente
+            System.out.println("Cliente: " + cliente.getNomeLogado());
 
             if (cliente.PagamentoAutorizado()) {
                 double frete = carrinho.calcularFrete();
 
-                System.out.println("Valor Produtos: R$ " + carrinho.valorTotal);
+                System.out.println("Valor Produtos: R$ " + carrinho.getValorTotal());
                 System.out.println("Frete: R$ " + (frete == 0 ? "Grátis" : frete));
                 System.out.println("Total: R$ " + carrinho.calcularValorFinal());
 
-                // Gera um número de pedido simples
-                int numPedido = carrinho.idPedidoBase + cliente.usuarioLogado;
+                // AJUSTADO: Usando métodos para o cálculo do pedido
+                int numPedido = carrinho.getIdPedidoBase() + cliente.getUsuarioLogado();
 
                 System.out.println("Número do pedido: #" + numPedido);
-                System.out.println("Enviando para: " + cliente.enderecos[cliente.usuarioLogado]);
+                // AJUSTADO: Usando o método de endereço do Cliente
+                System.out.println("Enviando para: " + cliente.getEnderecoLogado());
                 System.out.println("Compra realizada com sucesso.");
             } else {
                 System.out.println("Pagamento não autorizado.");
